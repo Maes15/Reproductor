@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        <title>Reproductor de musica</title>
+
+
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Reproductor de Musica"/>
+    <meta name="author" content="Alejandro Maestre"/>
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+
+    </head>
+
+    <body>
+
+        <div>
+
+
+
+                    <div class="main-wrapper">
+                        <h1>Reproductor de Musica</h1>
+                    </div>
+
+                    <form onsubmit="soundcloud()" action="javascript:void(0)" class="search">
+
+                            <h3> Buscador</h3>
+                            <h4>
+                                <input type="text" placeholder="" required>
+                                <button type="submit">Enter</button>
+                            </h4>
+                            <div id="lista"></div>
+                            <h5 id="rep" ondragover="miOnOver(event)" ondragend="miOnEnd(event)" ondrop="miOnDrop(event)">
+                            </h5>
+                    </form>
+
+                    <div class="footer">
+                        <p>Copyright (c) 2018</p>
+                    </div>
+            <script
+                    src="https://code.jquery.com/jquery-3.3.1.min.js"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                    crossorigin="anonymous">
+            </script>
+            <script src="https://connect.soundcloud.com/sdk/sdk-3.3.0.js"></script>
+            <script src="js/main.js"></script>
+
+            <script>
+                function soundcloud () {
+                    SC.initialize({
+                        client_id: 'unnFdubicpq7RVFFsQucZzduDPQTaCYy'
+                    });
+
+                    SC.get('/tracks', {
+                        q: 'acdc'
+                    }).then(function (tracks){
+                        console.log(tracks);
+                        $('.rep')[0];
+                        $('#lista').append('<div class="caratula" draggable="true"><img src="' + tracks[1].artwork_url + '" /></div>');
+
+                        console.log($('.rep'));
+                        SC.stream('/tracks/'+ tracks[0].id).then(function (player){
+                            player.play().then(function(){
+                                console.log('Playback started!');
+                            }).catch(function(e){
+                                console.error('Playback rejected. Try calling play() from a user interaction.', e);
+                            });
+                        })
+                    })
+                }
+            </script>
+
+
+        </div>
+    </body>
+</html>
