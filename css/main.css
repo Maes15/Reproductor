@@ -1,7 +1,7 @@
 body{
     background-color: #669997;
-    overflow-y: hidden;
-    overflow-x: scroll;
+
+
 }
 
 .main-wrapper{
@@ -17,13 +17,20 @@ h1{
     font-family: 'Montserrat', sans-serif;
     font-size: calc(40px + 1vw);
 }
-
+#lista{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    padding: auto;}
 #rep{
     padding: auto;
     background-color: tomato;
     width: 250px;
     height: 150px;
+
 }
+
+
 
 .bus{
     padding: auto;
